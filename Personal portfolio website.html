@@ -1,212 +1,498 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vijay Babu Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vijay Babu G | Responsive Resume</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0f172a;
+      --secondary: #1e293b;
+      --accent: #2563eb;
+      --accent-soft: #dbeafe;
+      --surface: #ffffff;
+      --muted: #64748b;
+      --border: rgba(148, 163, 184, 0.22);
+      --bg: linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+      --shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+    }
 
-    <style>
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:Arial, sans-serif;
-        }
+    * {
+      box-sizing: border-box;
+    }
 
-        body{
-            background:#f4f4f4;
-            color:#333;
-            line-height:1.6;
-        }
+    html {
+      scroll-behavior: smooth;
+    }
 
-        header{
-            background:#1f2937;
-            color:white;
-            text-align:center;
-            padding:60px 20px;
-        }
+    body {
+      margin: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      background: var(--bg);
+      color: #1f2937;
+      line-height: 1.65;
+    }
 
-        header h1{
-            font-size:40px;
-            margin-bottom:10px;
-        }
+    .resume-wrapper {
+      padding: 32px 16px 48px;
+    }
 
-        header p{
-            font-size:18px;
-        }
+    .resume-card {
+      max-width: 1120px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
 
-        section{
-            padding:40px 20px;
-            max-width:900px;
-            margin:auto;
-        }
+    .top-banner {
+      background: linear-gradient(135deg, #0f172a, #1d4ed8 70%, #38bdf8);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
 
-        h2{
-            margin-bottom:15px;
-            color:#1f2937;
-            font-size:28px;
-        }
+    .top-banner::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -80px auto;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.12);
+      filter: blur(2px);
+    }
 
-        .skills-list{
-            display:flex;
-            gap:15px;
-            flex-wrap:wrap;
-        }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding: 48px 36px;
+    }
 
-        .skill{
-            background:#1f2937;
-            color:white;
-            padding:10px 15px;
-            border-radius:5px;
-        }
+    .name-title {
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 10px;
+    }
 
-        .project{
-            background:white;
-            padding:20px;
-            margin-bottom:20px;
-            border-radius:8px;
-            box-shadow:0 2px 5px rgba(0,0,0,0.1);
-        }
+    .role-line {
+      font-size: clamp(1rem, 2.4vw, 1.3rem);
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 22px;
+    }
 
-        .project h3{
-            margin-bottom:10px;
-        }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
 
-        .project a{
-            display:inline-block;
-            margin-top:10px;
-            color:#2563eb;
-            text-decoration:none;
-            font-weight:bold;
-        }
+    .contact-chip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      text-decoration: none;
+      transition: transform 0.2s ease, background 0.2s ease;
+      min-height: 56px;
+    }
 
-        .project a:hover{
-            text-decoration:underline;
-        }
+    .contact-chip:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.18);
+      color: #fff;
+    }
 
-        footer{
-            background:#1f2937;
-            color:white;
-            text-align:center;
-            padding:20px;
-            margin-top:30px;
-        }
+    .contact-chip strong,
+    .contact-chip span {
+      display: block;
+      line-height: 1.25;
+      overflow-wrap: anywhere;
+    }
 
-        .reflection{
-            background:white;
-            padding:20px;
-            border-radius:8px;
-            margin-top:20px;
-            box-shadow:0 2px 5px rgba(0,0,0,0.1);
-        }
-    </style>
+    .contact-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: rgba(255, 255, 255, 0.18);
+      font-size: 0.95rem;
+      flex-shrink: 0;
+    }
+
+    .section-block {
+      padding: 30px 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-block:last-child {
+      border-bottom: 0;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .section-badge {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #3b82f6, #0ea5e9);
+      box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.1);
+    }
+
+    .lead-copy {
+      font-size: 1.03rem;
+      color: #334155;
+      margin: 0;
+    }
+
+    .info-card,
+    .timeline-card,
+    .achievement-card,
+    .reflection-card {
+      height: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
+    }
+
+    .timeline-card {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .timeline-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 28px rgba(15, 23, 42, 0.08);
+    }
+
+    .item-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .meta-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #1d4ed8;
+      font-size: 0.86rem;
+      font-weight: 600;
+    }
+
+    .item-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 6px;
+    }
+
+    .item-subtitle {
+      color: var(--muted);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .skill-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: #eff6ff;
+      color: #1e40af;
+      font-weight: 600;
+      border: 1px solid rgba(37, 99, 235, 0.14);
+      margin: 0 10px 10px 0;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .skill-chip:hover {
+      transform: translateY(-2px);
+      background: #dbeafe;
+    }
+
+    .project-link {
+      color: var(--accent);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .project-link:hover {
+      text-decoration: underline;
+    }
+
+    .timeline-card ul {
+      padding-left: 18px;
+      margin-bottom: 0;
+    }
+
+    .timeline-card li {
+      margin-bottom: 8px;
+      color: #475569;
+    }
+
+    .timeline-card li:last-child {
+      margin-bottom: 0;
+    }
+
+    .footer-note {
+      text-align: center;
+      color: #64748b;
+      padding: 24px 20px 30px;
+      font-size: 0.95rem;
+      background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(248,250,252,0.8) 100%);
+    }
+
+    @media (max-width: 991.98px) {
+      .hero-content {
+        padding: 38px 24px;
+      }
+
+      .section-block {
+        padding: 26px 24px;
+      }
+    }
+
+    @media (max-width: 767.98px) {
+      .resume-wrapper {
+        padding: 16px 10px 30px;
+      }
+
+      .resume-card {
+        border-radius: 20px;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-title {
+        font-size: 1.03rem;
+      }
+
+      .lead-copy {
+        font-size: 0.98rem;
+      }
+
+      .info-card,
+      .timeline-card,
+      .achievement-card,
+      .reflection-card {
+        padding: 18px;
+        border-radius: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-content {
+        padding: 30px 18px;
+      }
+
+      .section-block {
+        padding: 22px 18px;
+      }
+
+      .contact-chip {
+        padding: 11px 12px;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <div class="resume-wrapper">
+    <main class="resume-card">
+      <header class="top-banner">
+        <div class="hero-content container-fluid">
+          <div class="row align-items-center g-4">
+            <div class="col-lg-7">
+              <p class="text-uppercase fw-semibold mb-2 tracking-wide">Responsive Resume Page</p>
+              <h1 class="name-title">Vijay Babu G</h1>
+              <p class="role-line mb-0">B.Sc AIDA Student • Beginner Web Developer • Data Analysis Enthusiast</p>
+            </div>
+            <div class="col-lg-5">
+              <div class="contact-grid">
+                <a class="contact-chip" href="mailto:gvijaybabu.03@gmail.com">
+                  <div class="contact-icon">✉</div>
+                  <div>
+                    <strong>Email</strong>
+                    <span>gvijaybabu.03@gmail.com</span>
+                  </div>
+                </a>
+                <a class="contact-chip" href="tel:+919345892821">
+                  <div class="contact-icon">☎</div>
+                  <div>
+                    <strong>Phone</strong>
+                    <span>+91 93458 92821</span>
+                  </div>
+                </a>
+                <a class="contact-chip" href="https://github.com/g-vijay-babu" target="_blank" rel="noopener noreferrer">
+                  <div class="contact-icon">⌘</div>
+                  <div>
+                    <strong>GitHub</strong>
+                    <span>github.com/g-vijay-babu</span>
+                  </div>
+                </a>
+                <div class="contact-chip">
+                  <div class="contact-icon">📍</div>
+                  <div>
+                    <strong>Focus</strong>
+                    <span>Web Development & Data Analysis</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
 
-    <!-- Hero Section -->
-    <header>
-        <h1>Vijay Babu G</h1>
-        <p>
-            B.Sc AIDA Student | Beginner Web Developer |
-            Data Analysis Enthusiast
+      <section class="section-block">
+        <div class="section-title">
+          <span class="section-badge"></span>
+          Profile Summary
+        </div>
+        <p class="lead-copy">
+          I am a B.Sc. Artificial Intelligence and Data Analysis student with a growing interest in web development,
+          data analysis, and practical problem solving. I enjoy learning new tools, building clean beginner-friendly
+          projects, and improving how information is presented on the web. I am currently strengthening my foundation
+          in HTML, CSS, Python, and data visualization while seeking opportunities to apply these skills in real projects.
         </p>
-    </header>
+      </section>
 
-    <!-- About Section -->
-    <section>
-        <h2>About Me</h2>
-
-        <p>
-            I am a B.Sc Artificial Intelligence and Data Analysis student
-            with interest in web development, data analysis, and problem
-            solving. I enjoy learning new technologies and building
-            beginner-friendly projects that improve my practical skills.
-            I am currently focusing on HTML, CSS, Python, and data
-            visualization tools.
-        </p>
-    </section>
-
-    <!-- Skills Section -->
-    <section>
-        <h2>Skills</h2>
-
-        <div class="skills-list">
-            <div class="skill">HTML</div>
-            <div class="skill">CSS</div>
-            <div class="skill">Python</div>
-            <div class="skill">Data Analysis</div>
-            <div class="skill">Weka</div>
-            <div class="skill">Problem Solving</div>
+      <section class="section-block">
+        <div class="row g-4">
+          <div class="col-lg-6">
+            <div class="section-title">
+              <span class="section-badge"></span>
+              Education
+            </div>
+            <div class="info-card">
+              <div class="item-meta">
+                <span class="meta-pill">Current Program</span>
+                <span class="meta-pill">Undergraduate</span>
+              </div>
+              <h3 class="item-title">B.Sc. Artificial Intelligence & Data Analysis</h3>
+              <p class="item-subtitle mb-2">Student</p>
+              <p class="mb-0 text-secondary">
+                Building knowledge in data handling, machine learning fundamentals, statistical thinking,
+                and web technologies with a focus on practical skill development and project-based learning.
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="section-title">
+              <span class="section-badge"></span>
+              Skills
+            </div>
+            <div class="info-card">
+              <div>
+                <span class="skill-chip">HTML</span>
+                <span class="skill-chip">CSS</span>
+                <span class="skill-chip">Bootstrap</span>
+                <span class="skill-chip">Python</span>
+                <span class="skill-chip">Data Analysis</span>
+                <span class="skill-chip">Weka</span>
+                <span class="skill-chip">Problem Solving</span>
+                <span class="skill-chip">Responsive Design</span>
+              </div>
+            </div>
+          </div>
         </div>
-    </section>
+      </section>
 
-    <!-- Projects Section -->
-    <section>
-        <h2>Projects</h2>
-
-        <div class="project">
-            <h3>Kanchi Parivaar Website</h3>
-
-            <p>
-                Developed and maintained the Kanchi Parivaar website
-                using HTML, CSS, and web development tools.
-                The website was created to provide information and
-                improve online presence for the organization.
-                The project is available on GitHub.
-            </p>
-
-            <a href="https://kanchiparivaar.com/" target="_blank">
-                Visit Website
-            </a>
+      <section class="section-block">
+        <div class="section-title">
+          <span class="section-badge"></span>
+          Experience & Projects
         </div>
-
-        <div class="project">
-            <h3>Personal Portfolio Website</h3>
-
-            <p>
-                Created a responsive portfolio homepage using HTML
-                and CSS to showcase skills, projects, and contact
-                information.
-            </p>
+        <div class="row g-4">
+          <div class="col-md-6">
+            <article class="timeline-card">
+              <div class="item-meta">
+                <span class="meta-pill">Live Project</span>
+                <span class="meta-pill">Web Development</span>
+              </div>
+              <h3 class="item-title">Kanchi Parivaar Website</h3>
+              <p class="item-subtitle">HTML, CSS, and website maintenance</p>
+              <ul>
+                <li>Developed and maintained website pages to improve the organization’s online presence.</li>
+                <li>Focused on clear structure, readability, and user-friendly content presentation.</li>
+                <li>Applied front-end development basics to support an accessible and informative web experience.</li>
+              </ul>
+              <div class="mt-3">
+                <a class="project-link" href="https://kanchiparivaar.com/" target="_blank" rel="noopener noreferrer">Visit Website</a>
+              </div>
+            </article>
+          </div>
+          <div class="col-md-6">
+            <article class="timeline-card">
+              <div class="item-meta">
+                <span class="meta-pill">Personal Project</span>
+                <span class="meta-pill">Responsive UI</span>
+              </div>
+              <h3 class="item-title">Personal Portfolio Website</h3>
+              <p class="item-subtitle">Front-end practice project</p>
+              <ul>
+                <li>Created a responsive portfolio homepage to present skills, projects, and contact details.</li>
+                <li>Improved section hierarchy and spacing to make the content easier to scan on desktop and mobile.</li>
+                <li>Used structured layout techniques to create a cleaner and more professional visual presentation.</li>
+              </ul>
+            </article>
+          </div>
         </div>
-    </section>
+      </section>
 
-    <!-- Contact Section -->
-    <section>
-        <h2>Contact</h2>
 
-        <p>Email: gvijaybabu.03@gmail.com</p>
-        <p>Phone: +91 93458 92821</p>
-        <p>GitHub: <a href="https://github.com/g-vijay-babu" target="_blank">github.com/g-vijay-babu</a></p>
-</section>
-    </section>
 
-    <!-- AI Reflection Section -->
-    <section>
-        <h2>AI Usage Reflection</h2>
+      <div class="footer-note">
+        © 2026 Vijay Babu G • Responsive Resume Page built with Bootstrap, CSS, and JavaScript-ready structure.
+      </div>
+    </main>
+  </div>
 
-        <div class="reflection">
-            <p>
-                I used AI to help plan the structure of the portfolio
-                page, including deciding the order of sections such as
-                Hero, About, Skills, Projects, and Contact. AI also
-                helped improve the wording of the About and Projects
-                sections and suggested simple CSS styling ideas for
-                better readability. Some AI-generated content felt too
-                formal, so I manually edited the text to make it more
-                suitable for a beginner student portfolio. I replaced
-                one suggested sample project with my real project,
-                the Kanchi Parivaar website, and adjusted the content
-                according to my own experience and preferences.
-            </p>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <p>© 2026 Vijay Babu G | Portfolio Homepage</p>
-    </footer>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const chips = document.querySelectorAll('.contact-chip, .timeline-card, .skill-chip');
+      chips.forEach((item, index) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(10px)';
+        setTimeout(() => {
+          item.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
+          item.style.opacity = '1';
+          item.style.transform = 'translateY(0)';
+        }, 80 * index);
+      });
+    });
+  </script>
 </body>
 </html>
